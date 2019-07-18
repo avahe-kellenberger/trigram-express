@@ -12,6 +12,7 @@ export class EndpointListener {
 
   constructor() {
     app.post('/upload', this.upload.single('file'), this.handleUpload)
+    app.get('/texts', this.getUploadedTexts)
   }
 
   public listen(port: number, callback?: () => void): Server {
@@ -42,5 +43,16 @@ export class EndpointListener {
           response.send({ status: 400, error: reason })
         })
     }
+  }
+
+  private readonly getUploadedTexts: RequestHandlerParams = (request, response) => {
+    this.dbConnection
+      .query(`SELECT id, filename FROM ${this.dbConnection.tableName}`)
+      .then(entries => {
+        response.send({ status: 200, texts: entries })
+      })
+      .catch(reason => {
+        response.send({ status: 400, error: reason })
+      })
   }
 }
