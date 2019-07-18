@@ -25,7 +25,8 @@
     "pg": "^7.11.0",
     "pg-native": "^3.0.0",
     "pg-promise": "^8.7.4",
-    "schemats": "^3.0.3"
+    "schemats": "^3.0.3",
+    "trigram-kata": "https://github.com/avahe-kellenberger/trigram-kata"
   },
   "scripts": {
     "app": "webpack --mode production && node ./dist/bundle.js",
