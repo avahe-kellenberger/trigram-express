@@ -34,4 +34,8 @@ export class DatabaseTableConnection {
       console.error(`Error connecting to database: ${error}`)
     })
   }
+
+  public getEntryByID(id: number): Promise<osm.trigramentry[]> {
+    return this.database.query(`SELECT content FROM ${this.tableName} WHERE id = ${id}`)
+  }
 }

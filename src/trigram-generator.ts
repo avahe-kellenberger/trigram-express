@@ -59,10 +59,9 @@ export class TrigramGenerator {
   ): string {
     const startingKey: string = seedWords != null ? seedWords.join(' ') : trigramMap.keys().next().value
     let trigram: Trigram | undefined = trigramMap.get(startingKey)
-    // First two words are picked at the start
-    maxWords -= 2
     const generated: string[] = []
-    while (trigram != undefined && generated.length < maxWords) {
+    // First two words are picked at the start, so max word count is decreased by two.
+    while (trigram != undefined && generated.length < maxWords - 2) {
       const nextWord: string = TrigramGenerator.getRandomTrigramValue(trigram)
       generated.push(nextWord)
 

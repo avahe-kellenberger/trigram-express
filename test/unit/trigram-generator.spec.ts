@@ -26,8 +26,6 @@ describe('TrigramGenerator', () => {
     const generatedText: string = TrigramGenerator.generateRandomText(longSampleTrigramMap, seedWords)
     const seedWordsJoined: string = seedWords.join(' ')
     expect(generatedText.startsWith(seedWordsJoined)).toBeTruthy()
-
-    console.log(generatedText)
   })
 
   it('will generate a maximum # of words', () => {

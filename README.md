@@ -14,15 +14,6 @@ This project is being constructed as part of a take-home assignment for a job ap
 POST /upload
 GET /texts -> returns list of texts that have been uploaded
 GET /texts/:id -> returns info about the text
+GET /texts/:id/generate?maxWords&seedWords -> returns generated text
 ```
-
-## In-progress functionality
-
-The following functionality will be added:
-
-```
-GET /texts/:id/generate?maxSize&seedWords -> returns generated text
-```
-
-I am currently merging another git repository into this one, in order to add the text generation endpoint.
 
