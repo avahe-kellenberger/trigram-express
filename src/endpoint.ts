@@ -13,6 +13,7 @@ export class EndpointListener {
   constructor() {
     app.post('/upload', this.upload.single('file'), this.handleUpload)
     app.get('/texts', this.getUploadedTexts)
+    app.get('/texts/:id', this.getText)
   }
 
   public listen(port: number, callback?: () => void): Server {
@@ -50,6 +51,26 @@ export class EndpointListener {
       .query(`SELECT id, filename FROM ${this.dbConnection.tableName}`)
       .then(entries => {
         response.send({ status: 200, texts: entries })
+      })
+      .catch(reason => {
+        response.send({ status: 400, error: reason })
+      })
+  }
+
+  private readonly getText: RequestHandlerParams = (request, response) => {
+    const id: number = parseInt(request.params.id)
+    if (isNaN(id)) {
+      response.send({ status: 400, error: `Invalid ID` })
+      return
+    }
+    this.dbConnection
+      .query(`SELECT content FROM ${this.dbConnection.tableName} WHERE id = ${id}`)
+      .then(entries => {
+        if (entries.length < 1) {
+          response.send({ status: 400, error: `Text with id ${id} not found` })
+        } else {
+          response.send({ status: 200, texts: entries })
+        }
       })
       .catch(reason => {
         response.send({ status: 400, error: reason })
