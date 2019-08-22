@@ -17,3 +17,8 @@ GET /texts/:id -> returns info about the text
 GET /texts/:id/generate?maxWords&seedWords -> returns generated text
 ```
 
+## Installation Notes
+
+`libpq` must be installed 
+`pg_config` must be in your path
+

@@ -1,6 +1,7 @@
-import { IMain, IDatabase, TConfig } from 'pg-promise'
 import * as pgPromise from 'pg-promise'
 import * as osm from './osm'
+
+import { IMain, IDatabase, TConfig } from 'pg-promise'
 
 export class DatabaseTableConnection {
   public readonly tableName: string

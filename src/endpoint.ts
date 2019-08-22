@@ -1,10 +1,12 @@
 import * as osm from './osm'
 import app from './app'
+
 import { DatabaseTableConnection } from './database-connection'
-import multer = require('multer')
 import { RequestHandlerParams } from 'express-serve-static-core'
 import { Server } from 'http'
 import { TrigramGenerator } from './trigram-generator'
+
+import multer = require('multer')
 
 export class EndpointListener {
   private readonly dbConnection: DatabaseTableConnection = new DatabaseTableConnection('trigramentry')
@@ -47,7 +49,7 @@ export class EndpointListener {
     }
   }
 
-  private readonly getUploadedTexts: RequestHandlerParams = (request: any, response: any) => {
+  private readonly getUploadedTexts: RequestHandlerParams = (_: any, response: any) => {
     this.dbConnection
       .query(`SELECT id, filename FROM ${this.dbConnection.tableName}`)
       .then(entries => {
@@ -58,7 +60,7 @@ export class EndpointListener {
       })
   }
 
-  private readonly getText: RequestHandlerParams = (request, response) => {
+  private readonly getText: RequestHandlerParams = (request: any, response: any) => {
     const id: number = parseInt(request.params.id)
     if (isNaN(id)) {
       response.send({ status: 400, error: `Invalid ID` })
@@ -78,7 +80,7 @@ export class EndpointListener {
       })
   }
 
-  private readonly generateText: RequestHandlerParams = (request, response) => {
+  private readonly generateText: RequestHandlerParams = (request: any, response: any) => {
     const id: number = parseInt(request.params.id)
     if (isNaN(id)) {
       response.send({ status: 400, error: `Invalid ID` })
